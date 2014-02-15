@@ -92,10 +92,15 @@ Route::group(array('before' => 'auth'), function()
 	**/
 
 	Route::get('articulos', array('uses' => 'ArticulosController@mostrarArticulos'));
-	Route::get('articulos/nuevo/{id_usuario}', array('uses' => 'ArticulosController@nuevoArticulo'));
+	Route::get('articulos/nuevo/', array('uses' => 'ArticulosController@nuevoArticulo'));
 	Route::post('articulos/crear/', array('uses' => 'ArticulosController@crearArticulo'));
 	Route::get('articulos/{id}', array('uses'=>'ArticulosController@verArticulo'));
-    
+
+    /***
+    ** Sección comentarios
+    **/
+    Route::post('coments/crear/', array('uses' => 'ComentsController@crearComentario'));
+
 });
 
 

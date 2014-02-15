@@ -22,7 +22,8 @@ class ArticulosController extends BaseController {
      */
     public function nuevoArticulo()
     {
-        return View::make('articulos.crear');
+        $usuario = Auth::user();
+        return View::make('articulos.crear', array('usuario' => $usuario )) ;
     }
 
     /**
@@ -46,7 +47,10 @@ class ArticulosController extends BaseController {
     {
     
         $articulos = Articulo::find($id);
-    	return View::make('articulos.ver', array('articulo' => $articulos));
+        $usuario = Articulo::find($id)->usuario;
+        $comments = Articulo::find($id)->coments;
+        $usuarioLogueado = Auth::user();
+    	return View::make('articulos.ver', array('articulo' => $articulos, 'usuario' => $usuario, 'comments' => $comments));
     }
 
 }

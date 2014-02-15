@@ -1,14 +1,15 @@
 @extends('layouts.master')
  
 @section('sidebar')
-     Crear un artículo en nombre de {{$usuario->nombre}}
+     @parent
 @stop
  
 @section('content')
+        <h1>{{$usuario->nombre}} - Crear un artículo </h1>
         {{ HTML::link('usuarios', 'volver'); }}
-        <h1>
+        <h2>
   			Crear artículo
-		</h1>
+		</h2>
 		
         {{ Form::open(array('url' => 'articulos/crear/'))}}
             {{Form::label('titulo', 'Titulo')}}

@@ -9,15 +9,15 @@
 	<h1>Ver usuario</h1>
 	{{HTML::link('usuarios', 'Volver');}}
 
-	<h2> 
+	<h3> 
 		Usuario {{$usuario->nombre}}
-	</h2>
+	</h3>
 
 	El usuario se llama {{$usuario->nombre}} {{$usuario->apellido}}
 	Tiene id = {{$usuario->id}}
 	Fue creado el {{$usuario->created_at}}
 	<br>
-	{{HTML::link('articulos/nuevo/'.$usuario->id, 'Crear artículo');}}
+	{{HTML::link('articulos/nuevo/', 'Crear artículo');}}
 
 	<h3>Artículos escritos: </h3>
 	

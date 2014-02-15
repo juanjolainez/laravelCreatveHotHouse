@@ -62,6 +62,7 @@ class UsuariosController extends BaseController {
         // para buscar al usuario utilizamos el metido find que nos proporciona Laravel 
         // este método devuelve un objete con toda la información que contiene un usuario
         $articulos = Usuario::find($id)->articulos;
+
     	return View::make('usuarios.ver', array('usuario' => $usuario, 'articulos' => $articulos));
     }
 

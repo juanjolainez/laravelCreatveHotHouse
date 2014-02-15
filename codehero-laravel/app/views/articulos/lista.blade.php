@@ -1,7 +1,6 @@
 @extends('layouts.master')
  
 @section('sidebar')
-     Lista de artículos
 @stop
  
 @section('content')

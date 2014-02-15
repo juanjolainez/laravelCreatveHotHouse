@@ -2,7 +2,6 @@
  
 @section('sidebar')
      @parent
-     Lista de usuarios
 @stop
  
 @section('content')
