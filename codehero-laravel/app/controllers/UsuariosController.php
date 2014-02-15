@@ -4,7 +4,7 @@ class UsuariosController extends BaseController {
 
     
 	/**
-     * Mustra la lista con todos los usuarios
+     * Shows a list with all users
      */
 
     public function mostrarUsuarios()
@@ -22,7 +22,7 @@ class UsuariosController extends BaseController {
     }
 
  	/**
-     * Muestra formulario para crear Usuario
+     * Shows a form to create new users
      */
     public function nuevoUsuario()
     {
@@ -30,27 +30,24 @@ class UsuariosController extends BaseController {
     }
 
     /**
-     * Crear el usuario nuevo
+     * Create a new user
+     * Input => nombre (string)
+     *       => apellido (string)
+     *       => password (string)
+     *       => correo (string)
      */
     public function crearUsuario()
     {
         Usuario::create(Input::all());
-    // el método create nos permite crear un nuevo usuario en la base de datos, este método es proporcionado por Laravel
-    // create recibe como parámetro un arreglo con datos de un modelo y los inserta automáticamente en la base de datos 
-    // en este caso el arreglo es la información que viene desde un formulario y la obtenemos con el metido Input::all()
- 
         return Redirect::to('usuarios');
-    // el método redirect nos devuelve a la ruta de mostrar la lista de los usuarios
  
     }
 
     /**
-     * Ver usuario con id
+     * Browse user with id = $id
      */
     public function verUsuario($id)
     {
-    	// en este método podemos observar como se recibe un parámetro llamado id
-    	// este es el id del usuario que se desea buscar y se debe declarar en la ruta como un parámetro 
     
         if(Cache::has('Usuario'.$id)) {
             $usuario = Cache::get('Usuario'.$id);
@@ -63,7 +60,7 @@ class UsuariosController extends BaseController {
             $articulos= Cache::get('ArticulosUsuario'.$id);
         }
         else {
-            $articulos = Usuario::find($id)->articulos;
+            $articulos = $usuario->articulos;
             Cache::add('ArticulosUsuario'.$id, $articulos, 5);
         }
     	return View::make('usuarios.ver', array('usuario' => $usuario, 'articulos' => $articulos));

@@ -3,7 +3,10 @@
 class ComentsController extends BaseController {
 
     /**
-     * Crear el usuario nuevo
+     * Create a new comment
+     * Input => usuario_id (int)
+     *       => articulo_id (int) 
+     *       => text (text) 
      */
     public function crearComentario()
     {

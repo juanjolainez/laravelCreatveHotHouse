@@ -38,9 +38,7 @@ Route::post('registro', function(){
  
     $input = Input::all();
     
-    // al momento de crear el usuario la clave debe ser encriptada
-    // para utilizamos la función estática make de la clase Hash
-    // esta función encripta el texto para que sea almacenado de manera segura
+    // We need to encode the password 
     $input['password'] = Hash::make($input['password']);
  
     Usuario::create($input);
@@ -84,7 +82,6 @@ Route::group(array('before' => 'auth'), function()
         // Esta función esta disponible en cualquier parte del código
         // siempre y cuando haya un usuario con sesión iniciada
         return Redirect::to('usuarios/'.Auth::user()->id);
-       // echo 'Bienvenido '. Auth::user()->correo . ', su Id es: '.Auth::user()->id ;
     });
 
     /***

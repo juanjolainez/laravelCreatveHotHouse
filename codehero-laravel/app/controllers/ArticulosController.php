@@ -4,7 +4,7 @@ class ArticulosController extends BaseController {
 
     
 	/**
-     * Mustra la lista con todos los articulos
+     * Show a list with all the articles
      */
 
     public function mostrarArticulos()
@@ -23,7 +23,7 @@ class ArticulosController extends BaseController {
  
 
  	/**
-     * Muestra formulario para crear articulos
+     * Show a form to create a new article
      */
     public function nuevoArticulo()
     {
@@ -32,7 +32,9 @@ class ArticulosController extends BaseController {
     }
 
     /**
-     * Crear el articulo nuevo
+     * Create a new article
+     * Input => titulo (string) 
+     *       => texto (text) 
      */
     public function crearArticulo()
     {
@@ -46,7 +48,7 @@ class ArticulosController extends BaseController {
     }
 
     /**
-     * Ver articulo con id
+     * Browse the article with id = $id
      */
     public function verArticulo($id)
     {
@@ -59,8 +61,8 @@ class ArticulosController extends BaseController {
         }
         $usuario = $articulo->usuario;
         $comments = $articulo->coments;
-        $usuarioLogueado = Auth::user();
-    	return View::make('articulos.ver', array('articulo' => $articulo, 'usuario' => $usuario, 'comments' => $comments));
+    	return View::make('articulos.ver', array('articulo' => $articulo, 'usuario' => $usuario,
+                                                 'comments' => $comments));
     }
 
 }

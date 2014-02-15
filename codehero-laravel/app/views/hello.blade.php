@@ -25,7 +25,7 @@
 					<h1>Creative HotHouse Laravel Project.</h1>
 					<p>
 					This is a simple responsive mini-blog with user login and other back-end functionalities using Laravel MVC
-					framework, Bootstrap, jQuery and MemCache.
+					framework, Bootstrap, jQuery, Blade and MemCache.
 					</p>
 					<p>
 					<a class="btn btn-lg btn-primary" href="login" role="button">Sign up today</a>
