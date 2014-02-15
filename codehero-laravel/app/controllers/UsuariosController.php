@@ -9,23 +9,17 @@ class UsuariosController extends BaseController {
 
     public function mostrarUsuarios()
     {
-        $usuarios = Usuario::all(); 
-        
-        // Con el método all() le estamos pidiendo al modelo de Usuario
-        // que busque todos los registros contenidos en esa tabla y los devuelva en un Array
+
+        if(Cache::has('AllUsers')) {
+            $usuarios = Cache::get('AllUsers'.$id);
+        }
+        else {
+            $usuarios = Usuario::all(); 
+            Cache::add('AllUsers', $usuarios, 5);
+        }
         
         return View::make('usuarios.lista', array('usuarios' => $usuarios));
-        
-        // El método make de la clase View indica cual vista vamos a mostrar al usuario 
-        //y también pasa como parámetro los datos que queramos pasar a la vista. 
-        // En este caso le estamos pasando un array con todos los usuarios
     }
- 
-    public function login() {
-        return View::make('usuarios.login');
-    }
-
-
 
  	/**
      * Muestra formulario para crear Usuario
@@ -58,11 +52,20 @@ class UsuariosController extends BaseController {
     	// en este método podemos observar como se recibe un parámetro llamado id
     	// este es el id del usuario que se desea buscar y se debe declarar en la ruta como un parámetro 
     
-        $usuario = Usuario::find($id);
-        // para buscar al usuario utilizamos el metido find que nos proporciona Laravel 
-        // este método devuelve un objete con toda la información que contiene un usuario
-        $articulos = Usuario::find($id)->articulos;
-
+        if(Cache::has('Usuario'.$id)) {
+            $usuario = Cache::get('Usuario'.$id);
+        }
+        else {
+            $usuario = Usuario::find($id);
+            Cache::add('Usuario'.$id, $usuario, 5);
+        }
+        if(Cache::has('ArticulosUsuario'.$id)) {
+            $articulos= Cache::get('ArticulosUsuario'.$id);
+        }
+        else {
+            $articulos = Usuario::find($id)->articulos;
+            Cache::add('ArticulosUsuario'.$id, $articulos, 5);
+        }
     	return View::make('usuarios.ver', array('usuario' => $usuario, 'articulos' => $articulos));
     }
 

@@ -9,9 +9,14 @@ class ArticulosController extends BaseController {
 
     public function mostrarArticulos()
     {
-        $articulos = Articulo::all(); 
+        if(Cache::has('AllArticulos')) {
+            $articulos = Cache::get('AllArticulos');
+        }
+        else {
+            $articulos = Articulo::all(); 
+            Cache::add('AllArticulos', $articulos, 5);
+        }
         
-       
         return View::make('articulos.lista', array('articulos' => $articulos));
 
     }
@@ -45,12 +50,17 @@ class ArticulosController extends BaseController {
      */
     public function verArticulo($id)
     {
-    
-        $articulos = Articulo::find($id);
-        $usuario = Articulo::find($id)->usuario;
-        $comments = Articulo::find($id)->coments;
+        if(Cache::has('Articulo'.$id)) {
+            $articulo = Cache::get('Articulo'.$id);
+        }
+        else {
+            $articulo = Articulo::find($id);
+            Cache::add('Articulo'.$id, $articulo, 5);
+        }
+        $usuario = $articulo->usuario;
+        $comments = $articulo->coments;
         $usuarioLogueado = Auth::user();
-    	return View::make('articulos.ver', array('articulo' => $articulos, 'usuario' => $usuario, 'comments' => $comments));
+    	return View::make('articulos.ver', array('articulo' => $articulo, 'usuario' => $usuario, 'comments' => $comments));
     }
 
 }
